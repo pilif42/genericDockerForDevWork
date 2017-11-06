@@ -1,3 +1,6 @@
+This work was done with Docker Community Edition Version 17.09.0-ce-mac35 (19611) on a Mac OS X El Capitan.
+
+
 - In our docker-compose-dev_env.yml, we define all the services that we need for our development work. For instance, rather than installing RabbitMQ locally, we will just run it inside a container. This helps be efficient quickly.
 	- Notes on the ports section:
 		- for some mappings, we use variables. ${EX_REDIS_PORT} for instance. These variables are being pickep up from the file .env at the root of the project.
@@ -42,6 +45,9 @@ docker rm <CONTAINER_NAME>
 docker-compose -f docker-compose-dev_env.yml up -d  
 
 
+- to verify Redis is up and running:
+	-
+
 - to verify RabbitMQ is up and running:
 	- http://localhost:16672/#/ with guest / guest
 
@@ -61,3 +67,10 @@ docker-compose -f docker-compose-dev_env.yml up -d
 	- After entering the password defined in docker-compose-dev_env.yml, you get presented with:
 			Connected to localhost.
 			sftp> 
+
+			- If instead, you get: WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!, IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+					- stop and remove containers
+					- cd /Users/philippebrossier/.ssh/
+					- vi known_hosts
+					- remove the line starting [localhost]:122
+					- restart containers
