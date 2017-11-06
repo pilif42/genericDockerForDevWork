@@ -43,10 +43,12 @@ This work was done with Docker Community Edition Version 17.09.0-ce-mac35 (19611
 						- create a file called action_groundzero.sql
 						- create a file called action_test_data.sql
 						- docker build -t postgresimage .
+		- this image was tested with:
+				- docker run -p 6432:5432 postgresimage
 		- this image was published to Docker Cloud:
 				- docker login with brossierp
-				- docker tag postgresimage brossierp/postgres:1.0.0
-				- docker push brossierp/postgres:1.0.0
+				- docker tag postgresimage brossierp/postgres:1.0.1
+				- docker push brossierp/postgres:1.0.1
 
 
 - to view running containers:
@@ -64,6 +66,7 @@ docker rm <CONTAINER_NAME>
 
 - to create & start containers in the background:
 docker-compose -f docker-compose-dev_env.yml up -d  
+	- if one container does not start cleanly and you want to get more details on the error, remove the -d option and you will get full error details.
 
 
 - to stop and remove all containers:
@@ -104,3 +107,15 @@ docker start $(docker ps -a -q)
 					- vi known_hosts
 					- remove the line starting [localhost]:122
 					- restart containers
+
+
+- to verify PostgreSQL is up and running:
+	- open pgAdmin
+	- create a server connection with:
+			- hostname = localhost
+			- port = 6432 because this is the value of ${EX_POSTGRES_PORT} in .env
+			- maintenance database = postgres
+			- username = postgres
+			- password = postgres
+	- check that, in the database postgres, the schema action has been created as per its definition in action_groundzero.sql of brossierp/postgres:1.0.1
+	
