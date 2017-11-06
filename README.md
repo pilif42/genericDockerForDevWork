@@ -46,3 +46,18 @@ docker-compose -f docker-compose-dev_env.yml up -d
 	- http://localhost:16672/#/ with guest / guest
 
 
+- to verify the sftp server is up and running:
+	- open a Terminal
+	- sftp -P 122 centos@localhost
+			- 122 is the port value ${EX_SFTP_PORT} defined in .env
+			- centos is the user defined in docker-compose-dev_env.yml
+			- localhost or <host-ip> of the Mac onto which I started containers
+	- You then get presented with:
+			The authenticity of host '[localhost]:122 ([127.0.0.1]:122)' can't be established.
+			ED25519 key fingerprint is SHA256:vFTS6LbVlo8V9blmaIy9brByV0w0adTp0liUxBtslIc.
+			Are you sure you want to continue connecting (yes/no)? yes
+			Warning: Permanently added '[localhost]:122' (ED25519) to the list of known hosts.
+			centos@localhost's password: 
+	- After entering the password defined in docker-compose-dev_env.yml, you get presented with:
+			Connected to localhost.
+			sftp> 
