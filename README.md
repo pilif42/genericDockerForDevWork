@@ -41,12 +41,21 @@ docker stop <CONTAINER_NAME>
 docker rm <CONTAINER_NAME>
 
 
-- to start containers in the background:
+- to create & start containers in the background:
 docker-compose -f docker-compose-dev_env.yml up -d  
 
 
-- to verify Redis is up and running:
-	-
+- to stop and remove all containers:
+docker-compose -f docker-compose-dev_env.yml down  
+
+
+- to stop all containers but not removing them:
+docker stop $(docker ps -q)
+
+
+- to start all containers:
+docker start $(docker ps -a -q)
+
 
 - to verify RabbitMQ is up and running:
 	- http://localhost:16672/#/ with guest / guest
