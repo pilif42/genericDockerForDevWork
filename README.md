@@ -1,6 +1,14 @@
 This work was done with Docker Community Edition Version 17.09.0-ce-mac35 (19611) on a Mac OS X El Capitan.
 
 
+- to log into Docker:
+	- option 1:
+			- https://cloud.docker.com/
+			- username / pwd
+	- option 2:
+			- docker login
+
+
 - In our docker-compose-dev_env.yml, we define all the services that we need for our development work. For instance, rather than installing RabbitMQ locally, we will just run it inside a container. This helps be efficient quickly.
 	- Notes on the ports section:
 		- for some mappings, we use variables. ${EX_REDIS_PORT} for instance. These variables are being pickep up from the file .env at the root of the project.
@@ -26,6 +34,19 @@ This work was done with Docker Community Edition Version 17.09.0-ce-mac35 (19611
 						- content_type: text/xml
 						- Encoding: string
 		- when running with Docker, note that I mapped 15672 to 16672. So, the console is at http://localhost:16672/#/
+
+	- Notes on the PostgreSQL service:
+		- the image used was built doing the following:
+				- create a directory postgresImage (see the one in this GitHub project)
+				- in postgresImage:
+						- create a file called Dockerfile
+						- create a file called action_groundzero.sql
+						- create a file called action_test_data.sql
+						- docker build -t postgresimage .
+		- this image was published to Docker Cloud:
+				- docker login with brossierp
+				- docker tag postgresimage brossierp/postgres:1.0.0
+				- docker push brossierp/postgres:1.0.0
 
 
 - to view running containers:

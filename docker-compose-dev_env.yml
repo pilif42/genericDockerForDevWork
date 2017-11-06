@@ -21,3 +21,8 @@ services:
     ports:
       - "${EX_SFTP_PORT}:22"
     command: centos:JLibV2&XD,:1001
+  postgres:
+    container_name: postgres
+    image: sdcplatform/postgres
+    ports:
+      - "${EX_POSTGRES_PORT}:5432"
