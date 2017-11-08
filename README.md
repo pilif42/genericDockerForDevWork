@@ -121,3 +121,8 @@ docker start $(docker ps -a -q)
 	- check that you can trigger manually the execution of the script action_test_data.sql:
 			- docker exec postgres psql -U postgres -d postgres -f action_test_data.sql
 			- verify that the table outcomecategory has now been created.
+
+
+- to verify MongoDB is up and running:
+	- TODO
+	
